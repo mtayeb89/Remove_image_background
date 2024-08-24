@@ -4,6 +4,9 @@ from rembg import remove
 # Import the OpenCV library for image processing tasks
 import cv2
 
+# Import matplotlib for displaying images
+import matplotlib.pyplot as plt
+
 # Define the path to the input image file
 input_path = 'Icecreamcone.jpg'
 
@@ -19,13 +22,12 @@ output_image = remove(input_image)
 # Save the output image (with background removed) to the specified path
 cv2.imwrite(output_path, output_image)
 
-# Display the output image in a window
-cv2.imshow(output_path, output_image)
+# Convert the image from BGR (OpenCV default) to RGB (for correct display in matplotlib)
+output_image_rgb = cv2.cvtColor(output_image, cv2.COLOR_BGR2RGB)
 
-# Wait indefinitely for a key press; close the window if 'q' is pressed
-if cv2.waitKey(0) & 0xFF == ord('q'):
-    # Close the currently opened image window
-    cv2.close()
+# Display the output image using matplotlib
+plt.imshow(output_image_rgb)
+plt.title('Output Image')
+plt.axis('off')  # Turn off axis numbers and ticks
+plt.show()
 
-    # Destroy all windows created by OpenCV to free up resources
-    cv2.destroyAllWindows()
